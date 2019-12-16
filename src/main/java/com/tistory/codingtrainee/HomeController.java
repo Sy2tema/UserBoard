@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 // 컨트롤러 어노테이션이 붙어있다면 곧 Servlet클래스가 된다는 의미를 가진다.
 @Controller
 public class HomeController {
-	
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 	
 	/**
@@ -33,7 +32,7 @@ public class HomeController {
 		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
 		
 		String formattedDate = dateFormat.format(date);
-		
+		System.out.println(formattedDate);
 		model.addAttribute("serverTime", formattedDate );
 		
 		return "home";
