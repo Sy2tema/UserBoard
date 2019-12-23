@@ -4,5 +4,27 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd">
 	
 	<!-- 데이터베이스에 대한 연결 설정을 저장한다. -->
+<<<<<<< Updated upstream
 		
+=======
+	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<!-- log4jdbc를 추가해 SQL의 실행상황을 자세히 보려 한다. -->
+		<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver" />
+		<property name="url" value="jdbc:oracle:thin:@localhost:1521:sy2tema" />
+		<property name="username" value="spring" />
+		<property name="password" value="1234" />
+	</bean>
+	
+	<!-- SqlSessionFactory 객체 등록 -->
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<!-- classpath는 src를 의미한다. -->
+		<property name="configLocation" value="classpath:/mybatis-config.xml" />
+		<!-- mappers디렉토리 내 하위 디렉토리에 무관하게 전부 찾겠다는 뜻 -->
+		<property name="mapperLocations" value="classpath:mappers/**/*.xml" />
+	</bean>
+	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate" destroy-method="clearCache">
+		<constructor-arg name="sqlSessionFactory" ref="sqlSessionFactory" />
+	</bean>
+>>>>>>> Stashed changes
 </beans>
