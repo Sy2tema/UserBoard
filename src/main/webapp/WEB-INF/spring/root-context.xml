@@ -1,12 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd">
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:mybatis-spring="http://mybatis.org/schema/mybatis-spring"
+	xsi:schemaLocation="http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-4.3.xsd
+		http://mybatis.org/schema/mybatis-spring http://mybatis.org/schema/mybatis-spring-1.2.xsd
+		http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd">
 	
 	<!-- 데이터베이스에 대한 연결 설정을 저장한다. -->
-<<<<<<< Updated upstream
-		
-=======
 	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 		<!-- log4jdbc를 추가해 SQL의 실행상황을 자세히 보려 한다. -->
 		<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver" />
@@ -21,10 +26,12 @@
 		<!-- classpath는 src를 의미한다. -->
 		<property name="configLocation" value="classpath:/mybatis-config.xml" />
 		<!-- mappers디렉토리 내 하위 디렉토리에 무관하게 전부 찾겠다는 뜻 -->
-		<property name="mapperLocations" value="classpath:mappers/**/*.xml" />
+		<!-- 언제부터였는지는 모르겠으나 mappers폴더 뒤에 **로 모든 폴더나 파일을 찾는다는 표시를 지워 sqlSessionFactory에 오류가 발생했었다 -->
+		<property name="mapperLocations" value="classpath:/mappers/**/*Mapper.xml" />
 	</bean>
 	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate" destroy-method="clearCache">
 		<constructor-arg name="sqlSessionFactory" ref="sqlSessionFactory" />
 	</bean>
->>>>>>> Stashed changes
+	
+	<mybatis-spring:scan base-package="com.tistory.codingtrainee.mapper" />
 </beans>

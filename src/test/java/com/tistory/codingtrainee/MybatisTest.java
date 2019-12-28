@@ -30,6 +30,7 @@ public class MybatisTest {
 	@Inject
 	private SqlSessionFactory sqlFactory;
 	
+	// JUnit을 이용해 테스트를 진행하게 되며 어노테이션을 통해 테스트할 코드를 알려준다.
 	@Test
 	public void testFactory() {
 		logger.info("sqlFactory : " + sqlFactory);
