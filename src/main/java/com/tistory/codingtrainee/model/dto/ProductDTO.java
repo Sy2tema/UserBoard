@@ -1,5 +1,6 @@
 package com.tistory.codingtrainee.model.dto;
 
+// Data Transfer Object로 계층간 데이터 교환을 위한 객체를 뜻한다
 public class ProductDTO {
 	private String name;
 	private double price;
