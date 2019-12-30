@@ -1,16 +1,16 @@
-package com.tistory.codingtrainee.model.dao;
+package com.tistory.codingtrainee.service;
 
 import java.util.List;
 
 import com.tistory.codingtrainee.model.dto.MemberDTO;
 
-//Data Access Object로 Database내의 데이터에 접근하기 위한 인터페이스를 선언한다
-public interface MemberDAO {
+// DAO와 별도로 Service를 구현하지 않는 경우도 있다 
+public interface MemberService {
 	public List<MemberDTO> memberList();
 	
-	public void insertMember(MemberDTO vo);
+	public void insertMember(MemberDTO dto);
 	public MemberDTO viewMember(String userid);
-	public void updateMember(MemberDTO vo);
+	public void updateMember(MemberDTO dto);
 	public void deleteMember(String userid);
 	
 	public boolean checkPwd(String userid, String password);

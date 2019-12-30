@@ -24,23 +24,30 @@ public class MemberDAOImpl implements MemberDAO {
 	SqlSession sqlSession;
 	
 	@Override
-	public List<MemberDAO> memberList() {
+	public List<MemberDTO> memberList() {
 		logger.info("memberList()메소드가 호출되었습니다.");
 		
 		// sql mapper에 작성된 sql코드가 실행된다(auto commit and close)
+		// member.memberList에서 앞은 namespace, 뒤는 id가 된다
 		return sqlSession.selectList("member.memberList");
 	}
 
+	// 데이터베이스로 쿼리문을 보낼 때 commit()이나 close()를 할 필요가 없다 (자동으로 진행됨)
 	@Override
 	public void insertMember(MemberDTO vo) {
-		// TODO Auto-generated method stub
-
+		// memberMapper.xml에 등록된 쿼리문을 호출한다
+		sqlSession.insert("member.insertMember", vo);
 	}
 
 	@Override
 	public MemberDTO viewMember(String userid) {
+		return sqlSession.selectOne("member.viewMember", userid);
+	}
+	
+	@Override
+	public void updateMember(MemberDTO vo) {
 		// TODO Auto-generated method stub
-		return null;
+
 	}
 
 	@Override

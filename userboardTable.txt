@@ -1,7 +1,14 @@
 create table userboard (
 	userid varchar2(50) not null primary key,
 	password varchar2(50) not null,
-	name varchar2(50) not null,
+	username varchar2(50) not null,
 	email varchar2(50) not null,
-	join_date date default sysdate
+	signup_date date default sysdate
 );
+
+insert into userboard (userid, password, username, email)
+values ('test', '1234', 'kim', 'test@testsite.com');
+
+select * from userboard;
+
+commit;

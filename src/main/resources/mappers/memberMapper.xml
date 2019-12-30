@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- mapper의 네임스페이스는 다른 mapper들과 중복되어서는 안된다 -->
+<mapper namespace="member">
+	<!-- 쿼리를 작성할 때는 뒤에 세미콜론을 작성하지 않도록 주의하자 -->
+	<select id="memberList" resultType="memberDto">
+		select * from userboard
+		order by username
+	</select>
+	
+	<insert id="insertMember">
+		insert into userboard (userid, password, username, email)
+		values (#{ userid }, #{ password }, #{ username }, #{ email })
+	</insert>
+	
+	<select id="viewMember" resultType="memberDto">
+		select * from userboard
+		where userid = #{ userid }
+	</select>
+</mapper>
