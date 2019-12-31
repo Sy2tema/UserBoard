@@ -9,6 +9,10 @@ public class UserDTO {
 	private String email;
 	private Date signup_date;
 	
+	// 비밀번호를 변경할 때 사용할 변수
+	private String newpassword;
+	private String checkpassword;
+	
 	public UserDTO() {
 	}
 	
@@ -24,6 +28,20 @@ public class UserDTO {
 	}
 	public void setPassword(String password) {
 		this.password = password;
+	}
+	
+	public String getNewpassword() {
+		return newpassword;
+	}
+	public void setNewpassword(String newpassword) {
+		this.newpassword = newpassword;
+	}
+	
+	public String getCheckpassword() {
+		return checkpassword;
+	}
+	public void setCheckpassword(String checkpassword) {
+		this.checkpassword = checkpassword;
 	}
 
 	public String getUsername() {

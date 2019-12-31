@@ -54,8 +54,7 @@ public class UserDAOImpl implements UserDAO {
 
 	@Override
 	public void deleteUser(String userid) {
-		// TODO Auto-generated method stub
-
+		sqlSession.delete("user.deleteUser", userid);
 	}
 
 	@Override

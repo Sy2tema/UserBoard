@@ -65,22 +65,55 @@ public class UserController {
 	
 	@RequestMapping("user/update.do")
 	public String update(@ModelAttribute UserDTO dto, Model model) {
-		logger.info("update()메소드가 호출되었습니다. " + dto.getUserid());
 		boolean isTrue = userService.checkPwd(dto.getUserid(), dto.getPassword());
-		logger.info("" + isTrue);
+		String newPassword = dto.getNewpassword();
+		String checkPassword = dto.getCheckpassword();
+		UserDTO dto2;
 		
 		// 입력했던 비밀번호와 일치할 경우에만 정보를 수정한다
 		if (isTrue) {
+			if (newPassword != "" && checkPassword != "") {
+				if (newPassword.contentEquals(checkPassword)) {
+					dto.setPassword(newPassword);
+				} else {
+					dto2 = userService.viewUser(dto.getUserid());
+					dto.setNewpassword("");
+					dto.setCheckpassword("");
+					dto.setSignup_date(dto2.getSignup_date());
+					model.addAttribute("dto", dto);
+					model.addAttribute("message", "새 비밀번호가 일치하지 않습니다.");
+					
+					return "user/user_view";
+				}
+			}
+			
 			userService.updateUser(dto);
 			return "redirect:/user/list.do";
 		} else {
 			// 따로 처리하지 않으면 기존 정보들이 사라지기 때문에 이를 방지했다
-			UserDTO dto2 = userService.viewUser(dto.getUserid());
+			dto2 = userService.viewUser(dto.getUserid());
+			dto.setNewpassword("");
+			dto.setCheckpassword("");
 			dto.setSignup_date(dto2.getSignup_date());
 			model.addAttribute("dto", dto);
 			model.addAttribute("message", "비밀번호가 일치하지 않습니다.");
-			return "user/view";
+			
+			return "user/user_view";
 		}
 	}
 	
+	@RequestMapping("user/delete.do")
+	public String delete(@RequestParam String userid, String password, Model model) {
+		boolean isTrue = userService.checkPwd(userid, password);
+		
+		if (isTrue) {
+			userService.deleteUser(userid);
+			return "redirect:/user/list.do";
+		} else {
+			model.addAttribute("message", "비밀번호가 일치하지 않습니다.");
+			model.addAttribute("dto", userService.viewUser(userid));
+			
+			return "user/user_view";
+		}
+	}
 }

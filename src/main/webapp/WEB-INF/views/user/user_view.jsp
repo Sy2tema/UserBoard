@@ -19,7 +19,7 @@
 			font-weight: bold;
 		}
 	</style>
-	<script type="text/javascript">
+	<script>
 		$(function () {
 			// 회원 정보 수정 버튼 클릭시 이벤트
 			$("#updateButton").click(function () {
@@ -44,12 +44,20 @@
 		<table border="1" width="400px">
 			<tr>
 				<td class="prop">아이디</td>
-				<td>${ dto.userid }</td>
+				<!-- 수정을 원하지 않을 때는 readonly속성을 사용할 수도 있다 -->
+				<td><input name="userid" value="${ dto.userid }" readonly /></td>
 			</tr>
 			<tr>
 				<td class="prop">비밀번호</td>
-				<!-- 수정을 원하지 않을 때는 readonly속성을 사용할 수도 있다 -->
 				<td><input type="password" name="password" /></td>
+			</tr>
+			<tr>
+				<td class="prop">새 비밀번호</td>
+				<td><input type="password" name="newpassword" value="${ dto.newpassword }" /></td>
+			</tr>
+			<tr>
+				<td class="prop">비밀번호 확인</td>
+				<td><input type="password" name="checkpassword" value="${ dto.checkpassword }" /></td>
 			</tr>
 			<tr>
 				<td class="prop">이름</td>
