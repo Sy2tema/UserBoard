@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- mapper의 네임스페이스는 다른 mapper들과 중복되어서는 안된다 -->
+<mapper namespace="user">
+	<!-- 쿼리를 작성할 때는 뒤에 세미콜론을 작성하지 않도록 주의하자 -->
+	<!-- resultType은 mybatis-config에서 alias설정을 통해 간략화시켰다 -->
+	<select id="userList" resultType="userDto">
+		select * from userboard
+		order by username
+	</select>
+	
+	<insert id="insertUser">
+		insert into userboard (userid, password, username, email)
+		values (#{ userid }, #{ password }, #{ username }, #{ email })
+	</insert>
+	
+	<select id="viewUser" resultType="userDto">
+		select * from userboard
+		where userid = #{ userid }
+	</select>
+	
+	<update id="updateUser">
+		update userboard
+		set password = #{ password },
+		username = #{ username },
+		email = #{ email }
+		where userid = #{ userid }
+	</update>
+	
+	<delete id="deleteUser">
+		delete from userboard
+		where userid = #{ userid }
+	</delete>
+	
+	<select id="checkPwd" resultType="int">
+		select count(*) from userboard
+		where userid = ${ userid } and password = ${ password }
+	</select>
+</mapper>

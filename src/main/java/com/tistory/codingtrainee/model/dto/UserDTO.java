@@ -2,14 +2,14 @@ package com.tistory.codingtrainee.model.dto;
 
 import java.util.Date;
 
-public class MemberDTO {
+public class UserDTO {
 	private String userid;
 	private String password;
 	private String username;
 	private String email;
 	private Date signup_date;
 	
-	public MemberDTO() {
+	public UserDTO() {
 	}
 	
 	public String getUserid() {

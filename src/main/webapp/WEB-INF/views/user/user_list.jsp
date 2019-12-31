@@ -9,6 +9,8 @@
 	<style>
 		td {
 			padding-left: 10px;
+			padding-top: 6px;
+			padding-bottom: 6px;
 		}
 		table, h2 {
 			margin-left: 10px;
@@ -17,13 +19,16 @@
 			margin-top: 10px;
 			margin-left: 10px;
 		}
+		.prop {
+			font-weight: bold;
+		}
 	</style>
 </head>
 <body>
 	<%@ include file="../include/menu.jsp" %>
 	<h2>회원 목록</h2>
 	<table border="1" width="600px">
-		<tr>
+		<tr class="prop">
 			<td>아이디</td>
 			<td>이름</td>
 			<td>이메일</td>
@@ -34,7 +39,7 @@
 			<tr>
 				<td>${ row.userid }</td>
 				<td>
-					<a href="${ path }/member/view.do?userid=${ row.userid }">${ row.username }</a>
+					<a href="${ path }/user/view.do?userid=${ row.userid }">${ row.username }</a>
 				</td>
 				<td>${ row.email }</td>
 				<td>
@@ -46,6 +51,6 @@
 	</table>
 	<!-- 페이지를 넘어갈 때는 .jsp대신 .do를 해주어야 한다. 단, WEB-INF바깥에 위치한 파일을 불러오고자 한다면 .jsp를 유지해도 무방하다 -->
 	<input type="button" value="새 회원 등록" 
-		onclick="location.href='${ path }/member/signup.do'" />
+		onclick="location.href='${ path }/user/signup.do'" />
 </body>
 </html>

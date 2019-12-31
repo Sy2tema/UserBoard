@@ -9,6 +9,8 @@
 	<style>
 		td {
 			padding-left: 10px;
+			padding-top: 6px;
+			padding-bottom: 6px;
 		}
 		h2, table {
 			margin-left: 10px;
@@ -21,7 +23,7 @@
 <body>
 	<%@ include file="../include/menu.jsp" %>
 	<h2>회원 등록 양식</h2>
-	<form name="form1" method="post" action="${ path }/member/insert.do">
+	<form name="form1" method="post" action="${ path }/user/insert.do">
 		<table border="1" width="400px">
 			<tr>
 				<td>아이디</td>
