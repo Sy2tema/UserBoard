@@ -11,3 +11,6 @@
 <c:set var="path" value="${ pageContext.request.contextPath }" />
 
 <script src="http://code.jquery.com/jquery-3.3.1.min.js"></script>
+
+<!-- css를 등록해준다. 이를 인식시키기 위해서는 servlet-context부분에서 추가적으로 리소스 등록 절차를 거쳐야 한다 -->
+<link rel="stylesheet" href="${ path }/include/style.css" />

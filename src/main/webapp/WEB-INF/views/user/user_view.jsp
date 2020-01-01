@@ -6,19 +6,6 @@
 	<meta charset="UTF-8">
 	<title>회원 정보 페이지</title>
 	<%@ include file="../include/header.jsp" %>
-	<style>
-		td {
-			padding-left: 10px;
-			padding-top: 6px;
-			padding-bottom: 6px;
-		}
-		table, h2 {
-			margin-left: 10px;
-		}
-		.prop {
-			font-weight: bold;
-		}
-	</style>
 	<script>
 		$(function () {
 			// 회원 정보 수정 버튼 클릭시 이벤트
@@ -78,7 +65,7 @@
 				<td colspan="2" align="center">
 					<input type="button" value="정보 수정" id="updateButton" />
 					<input type="button" value="회원 정보 삭제" id="deleteButton" />
-					<div style="color: red;">${ message }</div>
+					<div>${ message }</div>
 				</td>
 			</tr>
 		</table>

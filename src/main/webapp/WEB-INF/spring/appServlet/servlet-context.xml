@@ -16,6 +16,10 @@
 
 	<!-- Handles HTTP GET requests for /resources/** by efficiently serving up static resources in the ${webappRoot}/resources directory -->
 	<resources mapping="/resources/**" location="/resources/" />
+	
+	<!-- 정적인 요소들에 대한 매핑을 수행한다 -->
+	<!-- mapping은 상대 경로를, location은 실제로 리소스가 저장된 경로를 지정해주어야 하는 속성이다 -->
+	<resources mapping="/include/**" location="/WEB-INF/views/include/" />
 
 	<!-- beans를 활용해 앞뒤에 붙을 주소를 미리 입력해두어 주소를 지정하는 데 한결 편해지도록 돕는다. -->
 	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
@@ -23,9 +27,18 @@
 		<beans:property name="suffix" value=".jsp" />
 	</beans:bean>
 	
+	<!-- 파일 업로드를 위한 bean설정 -->
+	<beans:bean id="nultipartResulber"
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<!-- 업로드 최대 용량을 설정했다 -->
+		<beans:property name="maxUploadSize" value="10485760" />
+	</beans:bean>
+	
+	<!-- 파일 업로드를 수행할 디렉토리 설정 -->
+	<beans:bean id="uploadPath" class="java.lang.String">
+		<beans:constructor-arg value="c:/StringConfig/upload" />
+	</beans:bean>
+	
 	<!-- String bean을 태그로 검색하지 않고 자동으로 검색하도록 함 (auto scan) -->
 	<context:component-scan base-package="com.tistory.codingtrainee" />
-	
-	
-	
 </beans:beans>

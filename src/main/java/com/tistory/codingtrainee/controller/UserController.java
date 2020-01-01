@@ -1,5 +1,6 @@
 package com.tistory.codingtrainee.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -44,10 +45,70 @@ public class UserController {
 	// 이는 또한 request.getParameter()메소드를 사용하지 않아도 됨을 의미한다
 	// ModelAttribute어노테이션이 앞에 붙어있는 변수가 있다면 해당 변수는 form에서 넘어오는 데이터 전체(DTO)를 저장하는 역할을 한다는 의미를 가지게 된다
 	@RequestMapping("user/insert.do")
-	public String insert(@ModelAttribute UserDTO dto) {
-		// 테이블에 레코드를 입력하는 코드
-		userService.insertUser(dto);		
+	public String insert(@ModelAttribute UserDTO dto, Model model) {
+		String userId = dto.getUserid();
+		String password = dto.getPassword();
+		String passwordCheck = dto.getCheckpassword();
+		String userName = dto.getUsername();
+		String email = dto.getEmail();
 		
+		List<String> list;
+		UserDTO dto2;
+		
+		// 처음에는 dto에 값을 넣어 다시 포워딩했을 때 뷰 부분에 해당 데이터들이 반영되지 않는 문제가 있었지만
+		// 확인 결과 input태그 부분에 value로서 dto.<...>를 넣어주지 않아 포워딩한 값이 저장되지 않으며 발생했던 문제였음을 찾을 수 있었다. 
+		if (!password.equals("") && !password.equals(passwordCheck)) {
+			dto.setUserid(userId);
+			dto.setUsername(userName);
+			dto.setEmail(email);
+			
+			model.addAttribute("dto", dto);
+			model.addAttribute("message", "비밀번호가 확인되지 않았습니다.");
+			
+			return "user/signup";
+		}
+		
+		if (userId.equals("")) {
+			dto.setPassword(password);
+			dto.setUsername(userName);
+			dto.setEmail(email);
+			
+			model.addAttribute("dto", dto);
+			model.addAttribute("message", "아이디가 입력되지 않았습니다.");
+			
+			return "user/signup";
+		} else if (password.equals("")) {
+			dto.setUserid(userId);
+			dto.setUsername(userName);
+			dto.setEmail(email);
+			
+			model.addAttribute("dto", dto);
+			model.addAttribute("message", "비밀번호가 입력되지 않았습니다.");
+
+			return "user/signup";
+		} else if (userName.equals("")) {
+			dto.setUserid(userId);
+			dto.setPassword(password);
+			dto.setEmail(email);
+			
+			model.addAttribute("dto", dto);
+			model.addAttribute("message", "이름이 입력되지 않았습니다.");
+			
+			return "user/signup";
+		} else if (email.equals("")) {
+			dto.setUserid(userId);
+			dto.setPassword(password);
+			dto.setUsername(userName);
+			
+			model.addAttribute("dto", dto);
+			model.addAttribute("message", "이메일이 입력되지 않았습니다.");
+			
+			return "user/signup";
+		}
+		
+		// 테이블에 레코드를 입력하는 코드
+		userService.insertUser(dto);
+					
 		// 저장을 완료했으니 다시 회원가입 화면으로 돌아갈 이유가 없어지기 때문에 redirect를 통해 목록을 갱신시킨다
 		return "redirect:/user/list.do";
 	}
@@ -72,8 +133,8 @@ public class UserController {
 		
 		// 입력했던 비밀번호와 일치할 경우에만 정보를 수정한다
 		if (isTrue) {
-			if (newPassword != "" && checkPassword != "") {
-				if (newPassword.contentEquals(checkPassword)) {
+			if (!newPassword.equals("") && !checkPassword.equals("")) {
+				if (newPassword.equals(checkPassword)) {
 					dto.setPassword(newPassword);
 				} else {
 					dto2 = userService.viewUser(dto.getUserid());

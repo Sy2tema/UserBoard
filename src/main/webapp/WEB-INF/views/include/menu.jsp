@@ -2,9 +2,8 @@
     pageEncoding="UTF-8"%>
 
 <div style="text-align: center">
-	<a href="${path}/">메인 화면</a>
-	<a href="${path}/gugudan.do?number=6">구구단</a>
-	<a href="${path}/test.do">포워딩 테스트</a>
-	<a href="${path}/user/list.do">회원 관리</a>
+	| <a href="${ path }/">홈 화면</a> |
+	<a href="${ path }/user/list.do">회원 관리</a> |
+	<a href="#{ path }/upload/uploadFile">파일 업로드</a> |
 </div>
 <hr>

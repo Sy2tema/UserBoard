@@ -1,0 +1,31 @@
+@charset "UTF-8";
+td {
+	padding-left: 10px;
+	padding-top: 6px;
+	padding-bottom: 6px;
+}
+table, h2 {
+	margin-left: 10px;
+}
+div {
+	font-weight: bold;
+	color: yellowgreen;
+}
+.prop {
+	font-weight: bold;
+}
+a:link {
+	text-decoration: none; /* 링크의 밑줄을 제거해주었다. */
+	color: blue;
+}
+a:hover {
+	text-decoration: underline;
+	color: red;
+}
+a:visited {
+	text-decoration: none;
+}
+a:active {
+	text-decoration: none;
+	color: lime;
+}
