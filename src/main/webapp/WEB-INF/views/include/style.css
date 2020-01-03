@@ -29,3 +29,9 @@ a:active {
 	text-decoration: none;
 	color: lime;
 }
+iframe {
+	width: 400px;
+	height: 200px;
+	border: 1px;
+	border-style: bold;
+}

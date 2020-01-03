@@ -1,6 +1,5 @@
-package com.tistory.codingtrainee.controller;
+package com.tistory.codingtrainee.controller.user;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -51,9 +50,6 @@ public class UserController {
 		String passwordCheck = dto.getCheckpassword();
 		String userName = dto.getUsername();
 		String email = dto.getEmail();
-		
-		List<String> list;
-		UserDTO dto2;
 		
 		// 처음에는 dto에 값을 넣어 다시 포워딩했을 때 뷰 부분에 해당 데이터들이 반영되지 않는 문제가 있었지만
 		// 확인 결과 input태그 부분에 value로서 dto.<...>를 넣어주지 않아 포워딩한 값이 저장되지 않으며 발생했던 문제였음을 찾을 수 있었다. 
