@@ -5,7 +5,9 @@
 <configuration>
 	<!-- typeAliases를 통해 긴 문장을 축약하고자 선언할 수 있다 -->
 	<typeAliases>
-		<typeAlias type="com.tistory.codingtrainee.model.dto.UserDTO"
+		<typeAlias type="com.tistory.codingtrainee.model.user.dto.UserDTO"
 			alias="userDto" />
+		<typeAlias type="com.tistory.codingtrainee.model.board.dto.BoardDTO"
+			alias="boardDto" />
 	</typeAliases>
 </configuration>

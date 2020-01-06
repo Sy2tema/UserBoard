@@ -26,7 +26,7 @@
 				</td>
 				<td>${ row.email }</td>
 				<td>
-					<fmt:formatDate value="${ row.signup_date }" 
+					<fmt:formatDate value="${ row.signupdate }" 
 						pattern="yyyy-MM-dd HH:mm:ss" />
 				</td>
 			</tr>

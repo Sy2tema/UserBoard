@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.tistory.codingtrainee.model.dto.UserDTO;
-import com.tistory.codingtrainee.service.UserService;
+import com.tistory.codingtrainee.model.user.dto.UserDTO;
+import com.tistory.codingtrainee.service.user.UserService;
 
 @Controller
 public class UserController {
@@ -22,6 +22,16 @@ public class UserController {
 	// 의존관계를 주입시켜주는 것은 Spring에서 아주 중요하다
 	@Inject
 	UserService userService;
+	
+	// 홈으로 이동하기
+	// Model은 데이터를 담는 그릇으로 map구조로 이루어져 있다.
+	@RequestMapping("/")
+	public String main(Model model) {
+		model.addAttribute("message", "페이지 방문을 환영합니다.");
+		// servlet-context.xml을 통해 미리 문자열을 입력해놓은 결과 아래와 같은 반환값을 작성해도
+		// /WEB-INF/views/<리턴값>.jsp로 이루어진 결과를 얻을 수 있다.
+		return "main";
+	}
 	
 	@RequestMapping("user/list.do")
 	public String userList(Model model) {		
@@ -136,7 +146,7 @@ public class UserController {
 					dto2 = userService.viewUser(dto.getUserid());
 					dto.setNewpassword("");
 					dto.setCheckpassword("");
-					dto.setSignup_date(dto2.getSignup_date());
+					dto.setSignupdate(dto2.getSignupdate());
 					model.addAttribute("dto", dto);
 					model.addAttribute("message", "새 비밀번호가 일치하지 않습니다.");
 					
@@ -151,7 +161,7 @@ public class UserController {
 			dto2 = userService.viewUser(dto.getUserid());
 			dto.setNewpassword("");
 			dto.setCheckpassword("");
-			dto.setSignup_date(dto2.getSignup_date());
+			dto.setSignupdate(dto2.getSignupdate());
 			model.addAttribute("dto", dto);
 			model.addAttribute("message", "비밀번호가 일치하지 않습니다.");
 			

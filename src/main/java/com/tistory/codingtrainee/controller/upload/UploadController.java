@@ -24,20 +24,27 @@ public class UploadController {
 	String uploadPath;
 	
 	// 내용이 없는 상태로 uploadForm을 호출하면 이 메소드 부분으로 도착한다.
-	@RequestMapping(value = "/upload/uploadForm", method = RequestMethod.GET)
+	@RequestMapping(value = "/upload/upload_form", method = RequestMethod.GET)
 	public void uploadForm() {
-		
+		// upload/uploadForm.jsp로 포워딩된다
 	}
 	
-	@RequestMapping(value = "/upload/uploadForm", method = RequestMethod.POST)
+	@RequestMapping(value = "/upload/upload_form", method = RequestMethod.POST)
 	public ModelAndView uploadForm(MultipartFile file, ModelAndView modelView) throws Exception {
-		String fileName = file.getOriginalFilename();
+		// 한글 깨짐현상을 발견해 값을 받을 때 디코딩시켜주는 코드를 추가했다
+		String fileName = new String(file.getOriginalFilename().getBytes("8859_1"), "UTF-8"); 
+		
+		logger.info("파일 이름 : " + file.getOriginalFilename());
+		fileName = file.getOriginalFilename();
+		logger.info("파일 크기 : " + file.getSize());
+		logger.info("컨텐트 타입 : " + file.getContentType());
 		
 		fileName = uploadFile(fileName, file.getBytes());
 		
 		modelView.setViewName("upload/upload_result");
 		modelView.addObject("fileName", fileName);
 		
+		// jsp에서 지정해둔 upload_result.jsp로 포워딩된다
 		return modelView;
 	}
 	
