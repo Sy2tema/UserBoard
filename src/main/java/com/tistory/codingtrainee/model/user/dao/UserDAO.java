@@ -8,10 +8,12 @@ import com.tistory.codingtrainee.model.user.dto.UserDTO;
 public interface UserDAO {
 	public List<UserDTO> userList();
 	
-	public void insertUser(UserDTO vo);
+	public void insertUser(UserDTO dto);
 	public UserDTO viewUser(String userid);
-	public void updateUser(UserDTO vo);
+	public void updateUser(UserDTO dto);
 	public void deleteUser(String userid);
 	
-	public boolean checkPwd(String userid, String password);
+	public String loginCheck(UserDTO dto);
+	public String adminLoginCheck(UserDTO dto);
+	public boolean pwdCheck(String userid, String password);
 }

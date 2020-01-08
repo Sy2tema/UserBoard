@@ -40,8 +40,7 @@ public class BoardServiceImpl implements BoardService {
 
 	@Override
 	public void writePost(BoardDTO dto) throws Exception {
-		// TODO Auto-generated method stub
-
+		boardDao.writePost(dto);
 	}
 
 	@Override

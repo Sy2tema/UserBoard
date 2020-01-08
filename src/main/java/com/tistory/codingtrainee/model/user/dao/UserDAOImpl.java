@@ -36,9 +36,9 @@ public class UserDAOImpl implements UserDAO {
 
 	// 데이터베이스로 쿼리문을 보낼 때 commit()이나 close()를 할 필요가 없다 (자동으로 진행됨)
 	@Override
-	public void insertUser(UserDTO vo) {
+	public void insertUser(UserDTO dto) {
 		// userMapper.xml에 등록된 쿼리문을 호출한다
-		sqlSession.insert("user.insertUser", vo);
+		sqlSession.insert("user.insertUser", dto);
 	}
 
 	@Override
@@ -48,8 +48,8 @@ public class UserDAOImpl implements UserDAO {
 	}
 	
 	@Override
-	public void updateUser(UserDTO vo) {
-		sqlSession.update("user.updateUser", vo);
+	public void updateUser(UserDTO dto) {
+		sqlSession.update("user.updateUser", dto);
 	}
 
 	@Override
@@ -58,14 +58,24 @@ public class UserDAOImpl implements UserDAO {
 	}
 
 	@Override
-	public boolean checkPwd(String userid, String password) {
+	public String loginCheck(UserDTO dto) {
+		return sqlSession.selectOne("user.loginCheck", dto);
+	}
+	
+	@Override
+	public String adminLoginCheck(UserDTO dto) {
+		return sqlSession.selectOne("admin.loginCheck", dto);
+	}
+	
+	@Override
+	public boolean pwdCheck(String userid, String password) {
 		// 쿼리에 id와 비밀번호 두 개의 값을 보내야 하기 때문에 map으로 묶었다
 		Map<String, String> map = new HashMap<>();
 		
 		map.put("userid", userid);
 		map.put("password", password);
 		
-		int count = sqlSession.selectOne("user.checkPwd", map);
+		int count = sqlSession.selectOne("user.pwdCheck", map);
 		
 		// count가 1이면 비밀번호가 일치함을 뜻한다.
 		return count == 1 ? true : false;

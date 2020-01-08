@@ -40,8 +40,7 @@ public class BoardDAOImpl implements BoardDAO {
 
 	@Override
 	public void writePost(BoardDTO dto) throws Exception {
-		// TODO Auto-generated method stub
-
+		sqlSession.insert("board.insert", dto);
 	}
 
 	@Override

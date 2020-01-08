@@ -9,6 +9,11 @@
 </head>
 <body>
 	<%@ include file="include/menu.jsp" %>
-	<h1>${message}</h1>
+	<h2><a href="admin/login.do" style="color: black;">UserBoard프로젝트의 홈 화면입니다.</a></h2>
+	<c:if test="${ sessionScope.userid != null }">
+		<h2>
+			${ sessionScope.name } (${ sessionScope.userid }) 님의 방문을 환영합니다.
+		</h2>
+	</c:if>
 </body>
 </html>

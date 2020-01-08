@@ -3,6 +3,7 @@ package com.tistory.codingtrainee.controller.user;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,11 +12,13 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.tistory.codingtrainee.model.user.dto.UserDTO;
 import com.tistory.codingtrainee.service.user.UserService;
 
 @Controller
+@RequestMapping("/user/*") // 공통 url을 미리 매핑해둔다
 public class UserController {
 	private static final Logger logger = LoggerFactory.getLogger(UserController.class);
 	
@@ -23,17 +26,7 @@ public class UserController {
 	@Inject
 	UserService userService;
 	
-	// 홈으로 이동하기
-	// Model은 데이터를 담는 그릇으로 map구조로 이루어져 있다.
-	@RequestMapping("/")
-	public String main(Model model) {
-		model.addAttribute("message", "페이지 방문을 환영합니다.");
-		// servlet-context.xml을 통해 미리 문자열을 입력해놓은 결과 아래와 같은 반환값을 작성해도
-		// /WEB-INF/views/<리턴값>.jsp로 이루어진 결과를 얻을 수 있다.
-		return "main";
-	}
-	
-	@RequestMapping("user/list.do")
+	@RequestMapping("list.do")
 	public String userList(Model model) {		
 		List<UserDTO> list = userService.userList();
 		logger.info("회원 목록 : " + list);
@@ -44,7 +37,7 @@ public class UserController {
 	}
 	
 	// .do를 사용하고자 한다면 반드시 Controller에서 해당 작업을 실제로 실행하는 코드를 넣어주어야 정상 작동된다
-	@RequestMapping("user/signup.do")
+	@RequestMapping("signup.do")
 	public String signup(Model model) {
 		logger.info("signup()메소드가 호출되었습니다.");
 		return "user/signup";
@@ -53,7 +46,7 @@ public class UserController {
 	// Spring에서는 POST방식으로 데이터를 전송하더라도 DTO클래스를 생성해 자동으로 해당 데이터들을 수집하게 된다
 	// 이는 또한 request.getParameter()메소드를 사용하지 않아도 됨을 의미한다
 	// ModelAttribute어노테이션이 앞에 붙어있는 변수가 있다면 해당 변수는 form에서 넘어오는 데이터 전체(DTO)를 저장하는 역할을 한다는 의미를 가지게 된다
-	@RequestMapping("user/insert.do")
+	@RequestMapping("insert.do")
 	public String insert(@ModelAttribute UserDTO dto, Model model) {
 		String userId = dto.getUserid();
 		String password = dto.getPassword();
@@ -120,7 +113,7 @@ public class UserController {
 	}
 	
 	// RequestParam어노테이션은 ModelAttribute어노테이션과는 달리 form에서 원하는 값만 저장할 수 있도록 만들어준다
-	@RequestMapping("user/view.do")
+	@RequestMapping("view.do")
 	public String view(@RequestParam String userid, Model model) {
 		logger.info("조회한 회원 아이디 : " + userid);
 		
@@ -130,9 +123,9 @@ public class UserController {
 		return "user/user_view";
 	}
 	
-	@RequestMapping("user/update.do")
+	@RequestMapping("update.do")
 	public String update(@ModelAttribute UserDTO dto, Model model) {
-		boolean isTrue = userService.checkPwd(dto.getUserid(), dto.getPassword());
+		boolean isTrue = userService.pwdCheck(dto.getUserid(), dto.getPassword());
 		String newPassword = dto.getNewpassword();
 		String checkPassword = dto.getCheckpassword();
 		UserDTO dto2;
@@ -169,9 +162,9 @@ public class UserController {
 		}
 	}
 	
-	@RequestMapping("user/delete.do")
+	@RequestMapping("delete.do")
 	public String delete(@RequestParam String userid, String password, Model model) {
-		boolean isTrue = userService.checkPwd(userid, password);
+		boolean isTrue = userService.pwdCheck(userid, password);
 		
 		if (isTrue) {
 			userService.deleteUser(userid);
@@ -182,5 +175,38 @@ public class UserController {
 			
 			return "user/user_view";
 		}
+	}
+	
+	@RequestMapping("login.do")
+	public String login() {
+		return "user/login";
+	}
+	
+	@RequestMapping("loginCheck.do")
+	public ModelAndView loginCheck(@ModelAttribute UserDTO dto, HttpSession session) {
+		String name = userService.loginCheck(dto, session);
+		ModelAndView modelView = new ModelAndView();
+		
+		// 로그인에 실패할 경우 null이 저장된다
+		if (name != null) {
+			modelView.setViewName("main");
+		} else {
+			modelView.setViewName("user/login");
+			modelView.addObject("message", "error");
+		}
+		
+		return modelView;
+	}
+	
+	@RequestMapping("logout.do")
+	public ModelAndView logout(HttpSession session, ModelAndView modelView) {
+		// 현재 세션에 저장되어 있는 값을 모두 비운다
+		session.invalidate();
+		
+		// 이동할 페이지를 선택 후 해당 변수에 값을 저장해 함께 푸시한다
+		modelView.setViewName("user/login");
+		modelView.addObject("message", "logout");
+		
+		return modelView;
 	}
 }

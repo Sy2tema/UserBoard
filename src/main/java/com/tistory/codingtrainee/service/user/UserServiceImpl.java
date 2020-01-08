@@ -3,6 +3,7 @@ package com.tistory.codingtrainee.service.user;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -47,8 +48,22 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public boolean checkPwd(String userid, String password) {
-		return userDao.checkPwd(userid, password);
+	public String loginCheck(UserDTO dto, HttpSession session) {
+		String name = userDao.loginCheck(dto);
+		
+		// 로그인에 성공했을 시
+		if (name != null) {
+			// 세션변수에 값을 등록한다
+			session.setAttribute("userid", dto.getUserid());
+			session.setAttribute("name", name);
+		}
+		
+		return name;
+	}
+	
+	@Override
+	public boolean pwdCheck(String userid, String password) {
+		return userDao.pwdCheck(userid, password);
 	}
 
 }

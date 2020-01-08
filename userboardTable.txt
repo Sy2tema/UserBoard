@@ -16,9 +16,13 @@ create table postboard (
   primary key (boardingnumber)
 );
 
---서브쿼리로 글 관리
+--시퀸스로 글 관리 (게시글 번호 관리)
+create sequence sequenceboard
+  start with 1
+  increment by 1;
+
 insert into postboard (boardingnumber, title, content, writer)
-values ((select nvl(max(boardingnumber)+1, 1) from postboard), '안녕', '하세요', 'lee');
+values (sequenceboard.nextval, '안녕', '하세요', 'lee');
 
 insert into userboard (userid, password, username, email)
 values ('test', '1234', 'Kim', 'test@testsite.com');

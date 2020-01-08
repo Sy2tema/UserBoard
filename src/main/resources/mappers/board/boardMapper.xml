@@ -10,4 +10,9 @@
 		from postboard
 		order by boardingnumber desc
 	</select>
+	
+	<insert id="insert">
+		insert into postboard (boardingnumber, content, writer)
+		values (sequenceboard.nextval, #{ title }, #{ content }, #{ writer })
+	</insert>
 </mapper>
