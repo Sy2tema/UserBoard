@@ -12,13 +12,13 @@
 				const userid = $("#userid").val();
 				const password = $("#password").val();
 
-				if (userid == "") {
+				if (userid === "") {
 					alert("아이디 또는 비밀번호가 입력되지 않았습니다.");
 					$("#userid").focus();
 					return;
 				}
 
-				if (password == "") {
+				if (password === "") {
 					alert("비밀번호가 입력되지 않았습니다.");
 					$("#password").focus();
 					return;
