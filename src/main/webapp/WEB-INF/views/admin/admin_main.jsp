@@ -11,7 +11,7 @@
 	<%@ include file="../include/admin_menu.jsp" %>
 	<c:if test="${ message == 'success' }">
 		<h2>
-			${ sessionScope.admin_name } (${ sessionScope.admin_userid }) 님의 방문을 환영합니다.
+			${ sessionScope.admin_username } (${ sessionScope.admin_userid }) 님의 방문을 환영합니다.
 		</h2>
 	</c:if>
 </body>

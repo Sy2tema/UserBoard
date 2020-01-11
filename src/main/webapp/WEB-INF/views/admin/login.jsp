@@ -7,25 +7,27 @@
 	<title>관리자 로그인</title>
 	<%@ include file="../include/header.jsp" %>
 	<script>
-		$(function (){
-			const userid = $("#userid").val();
-			const password = $("#password").val();
+		$(function () {
+			$("#loginButton").click(function () {
+				const userid = $("#userid").val();
+				const password = $("#password").val();
 
-			if (userid === "") {
-				alert("아이디 또는 비밀번호가 입력되지 않았습니다.");
-				$("#userid").focus();
-				return;
-			}
+				if (userid === "") {
+					alert("아이디 또는 비밀번호가 입력되지 않았습니다.");
+					$("#userid").focus();
+					return;
+				}
 
-			if (password === "") {
-				alert("비밀번호가 입력되지 않았습니다.");
-				$("#password").focus();
-				return;
-			}
+				if (password === "") {
+					alert("비밀번호가 입력되지 않았습니다.");
+					$("#password").focus();
+					return;
+				}
 
-			document.form1.action = "${ path }/admin/loginCheck.do";
-			document.form1.submit();
-		})
+				document.form1.action = "${ path }/admin/loginCheck.do";
+				document.form1.submit();
+			});
+		});
 	</script>
 </head>
 <body>

@@ -3,6 +3,8 @@ package com.tistory.codingtrainee.controller.admin;
 import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
@@ -13,6 +15,8 @@ import com.tistory.codingtrainee.service.admin.AdminService;
 @Controller
 @RequestMapping("/admin/*")
 public class AdminController {
+	private static final Logger logger = LoggerFactory.getLogger(AdminController.class);
+	
 	@Inject
 	AdminService adminService;
 	
@@ -26,6 +30,7 @@ public class AdminController {
 		String name = adminService.loginCheck(dto);
 		
 		if (name != null) {
+			logger.info(dto.getUsername());
 			session.setAttribute("admin_userid", dto.getUserid());
 			session.setAttribute("admin_username", dto.getUsername());
 			

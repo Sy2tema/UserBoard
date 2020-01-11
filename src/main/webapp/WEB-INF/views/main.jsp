@@ -9,11 +9,16 @@
 </head>
 <body>
 	<%@ include file="include/menu.jsp" %>
-	<h2><a href="admin/login.do" style="color: black;">UserBoard프로젝트의 홈 화면입니다.</a></h2>
-	<c:if test="${ sessionScope.userid != null }">
-		<h2>
-			${ sessionScope.name } (${ sessionScope.userid }) 님의 방문을 환영합니다.
-		</h2>
-	</c:if>
+	<c:choose>
+		<c:when test="${ sessionScope.userid != null }">
+			<h2>UserBoard프로젝트의 홈 화면입니다.</h2>
+			<h2>
+				${ sessionScope.name } (${ sessionScope.userid }) 님의 방문을 환영합니다.
+			</h2>
+		</c:when>
+		<c:otherwise>
+			<h2><a href="admin/login.do" style="color: black;">UserBoard프로젝트의 홈 화면입니다.</a></h2>
+		</c:otherwise>
+	</c:choose>
 </body>
 </html>
