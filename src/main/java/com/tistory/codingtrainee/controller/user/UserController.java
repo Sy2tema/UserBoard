@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.tistory.codingtrainee.model.user.dto.UserDTO;
+import com.tistory.codingtrainee.service.admin.AdminService;
 import com.tistory.codingtrainee.service.user.UserService;
 
 @Controller
@@ -25,6 +26,9 @@ public class UserController {
 	// 의존관계를 주입시켜주는 것은 Spring에서 아주 중요하다
 	@Inject
 	UserService userService;
+	
+	@Inject
+	AdminService adminService;
 	
 	@RequestMapping("list.do")
 	public String userList(Model model) {		
@@ -105,11 +109,22 @@ public class UserController {
 			return "user/signup";
 		}
 		
+		// 관리자 계정과 같은 아이디로 가입하는 것을 방지하기 위한 부분
+		String isAdmin = adminService.loginCheck(dto);
+		
+		logger.info(isAdmin);
+		
+		if (isAdmin != null) {
+			model.addAttribute("message", "해당 아이디로는 가입이 불가능합니다.");
+			
+			return "user/signup";
+		}
+		
 		// 테이블에 레코드를 입력하는 코드
 		userService.insertUser(dto);
 					
 		// 저장을 완료했으니 다시 회원가입 화면으로 돌아갈 이유가 없어지기 때문에 redirect를 통해 목록을 갱신시킨다
-		return "redirect:/user/list.do";
+		return "redirect:/user/login.do";
 	}
 	
 	// RequestParam어노테이션은 ModelAttribute어노테이션과는 달리 form에서 원하는 값만 저장할 수 있도록 만들어준다

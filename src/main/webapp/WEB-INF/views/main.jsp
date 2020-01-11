@@ -17,7 +17,16 @@
 			</h2>
 		</c:when>
 		<c:otherwise>
-			<h2><a href="admin/login.do" style="color: black;">UserBoard프로젝트의 홈 화면입니다.</a></h2>
+			<h2><a href="admin/login.do" 
+					style="
+						color: black; 
+						text-decoration: none;
+						cursor: default;
+				">
+					UserBoard프로젝트의 홈 화면입니다.
+				</a>
+			</h2>
+			<h2>${ message }</h2>
 		</c:otherwise>
 	</c:choose>
 </body>

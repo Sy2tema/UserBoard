@@ -40,7 +40,7 @@
 		where userid=#{ userid } and password = #{ password }
 	</select>
 	
-	<select id="checkPwd" resultType="int">
+	<select id="pwdCheck" resultType="int">
 		select count(*) from userboard
 		where userid = #{ userid } and password = #{ password }
 	</select>

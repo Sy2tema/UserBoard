@@ -17,7 +17,9 @@
 <body>
 	<%@ include file="../include/menu.jsp" %>
 	<h2>유저 게시판</h2>
-	<button type="button" id="writeButton" style="margin-left: 10px; margin-bottom: 6px;">새 글</button>
+	<c:if test="${ sessionScope.userid != null }">
+		<button type="button" id="writeButton" style="margin-left: 10px; margin-bottom: 6px;">새 글쓰기</button>
+	</c:if>
 	<table border="1" width="600px">
 		<tr>
 			<th>글 번호</th>

@@ -1,6 +1,7 @@
 package com.tistory.codingtrainee.service.admin;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Service;
 

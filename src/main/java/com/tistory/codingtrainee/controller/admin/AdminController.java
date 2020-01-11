@@ -25,15 +25,22 @@ public class AdminController {
 		return "admin/login";
 	}
 	
+	// 일반적인 문자열 형식으로 반환 시 제대로 관리자 이름과 아이디가 뷰에 출력되지 않아 ModelAndView로 반환하도록 조치했다
+	@RequestMapping("admin_main.do")
+	public ModelAndView main(ModelAndView modelView) {
+		modelView.setViewName("admin/admin_main");
+		modelView.addObject("message", "success");
+		
+		return modelView;
+	}
+	
 	@RequestMapping("loginCheck.do")
 	public ModelAndView loginCheck(UserDTO dto, HttpSession session, ModelAndView modelView) {
 		String name = adminService.loginCheck(dto);
 		
 		if (name != null) {
-			logger.info(dto.getUsername());
-			session.setAttribute("admin_userid", dto.getUserid());
-			session.setAttribute("admin_username", dto.getUsername());
-			
+			session.setAttribute("userid", dto.getUserid());
+			session.setAttribute("username", name);
 			modelView.setViewName("admin/admin_main");
 			modelView.addObject("message", "success");
 		} else {

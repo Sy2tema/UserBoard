@@ -57,7 +57,7 @@
 			<tr>
 				<td class="prop">회원 등록 일자</td>
 				<td>
-					<fmt:formatDate value="${ dto.signup_date }"
+					<fmt:formatDate value="${ dto.signupdate }"
 						pattern="yyyy-MM-dd HH:mm:ss" />
 				</td>
 			</tr>

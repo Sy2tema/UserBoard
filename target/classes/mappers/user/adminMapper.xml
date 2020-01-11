@@ -6,6 +6,6 @@
 <mapper namespace="admin">
 	<select id="loginCheck" resultType="String">
 		select username from admin
-		where userid=#{ userid } and password = #{ password }
+		where userid = #{ userid } and password = #{ password }
 	</select>
 </mapper>

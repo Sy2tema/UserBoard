@@ -28,7 +28,7 @@ public class BoardController {
 		ModelAndView modelView = new ModelAndView();
 		modelView.setViewName("board/board_list"); //이동 페이지를 지정한다
 		Map<String, Object> map = new HashMap<>(); //데이터 저장
-		map.put("list", list);
+		map.put("list", list); // 읽어들인 리스트의 값들을 map에 넣어준다
 		modelView.addObject("map", map);
 		
 		return modelView;
