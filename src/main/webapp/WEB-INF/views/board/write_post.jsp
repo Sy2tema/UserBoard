@@ -9,20 +9,24 @@
 </head>
 <body>
 	<%@ include file="../include/menu.jsp" %>
-	<h2 style="width: 690px; text-align: center;">새 글쓰기</h2>
-	<form id="form1" name="form1" method="post" action="${ path }/board/insert.do">
-		<table style="width: 800px;">
+	<form id="form1" name="form1" metdod="post" action="${ patd }/board/insert.do">
+		<table width="450px" border="0" cellspacing="0" cellpadding="1">
+			<thead>
+				<tr>
+					<td colspan="2" align="center" width="100%"><div class="title">새 글</div></td>
+				</tr>
+			</thead>
 			<tr>
-				<th>제목</th>
-				<td><input name="title" id="title" size="79" placeholder="제목을 입력해주세요" /></td>
+				<td width="20%"><div>제목</div></td>
+				<td width="80%"><input name="title" id="title" placeholder="제목을 입력해주세요" /></td>
 			</tr>
 			<tr>
-				<th>내용</th>
-				<td><textarea name="content" id="content" rows="3" cols="80" placeholder="내용을 입력해주세요"></textarea></td>
+				<td width="20%"><div>내용</div></td>
+				<td width="80%"><textarea name="content" id="content" rows="3" cols="80" placeholder="내용을 입력해주세요"></textarea></td>
 			</tr>
 			<tr>
-				<th>첨부파일</th>
-				<td>
+				<td width="30%"><div>첨부파일</div></td>
+				<td width="70%"	>
 					<div class="fileDrop"></div>
 					<div id="uploadedList"></div>
 				</td>

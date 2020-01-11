@@ -16,11 +16,14 @@
 </head>
 <body>
 	<%@ include file="../include/menu.jsp" %>
-	<h2>유저 게시판</h2>
-	<c:if test="${ sessionScope.userid != null }">
-		<button type="button" id="writeButton" style="margin-left: 10px; margin-bottom: 6px;">새 글쓰기</button>
-	</c:if>
-	<table border="1" width="600px">
+	<table width="600px" style="margin-top: 3rem; margin-bottom: 1rem;">
+		<tr>
+			<td class="title">
+				유저 게시판
+			</td>
+		</tr>
+	</table>
+	<table border="1" width="600px" class="board">
 		<tr>
 			<th>글 번호</th>
 			<th>글 제목</th>
@@ -39,5 +42,16 @@
 			</tr>
 		</c:forEach>
 	</table>
+	<c:if test="${ sessionScope.userid != null }">
+		<table width="600px">
+			<tr>
+				<td width="15%">
+					<button class="button" id="writeButton">새 글</button>
+				</td>
+				<td width="90%"></td>
+			</tr>
+		</table>
+		
+	</c:if>
 </body>
 </html>

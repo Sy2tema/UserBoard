@@ -1,15 +1,63 @@
 @charset "UTF-8";
-td {
+body, html {
+	height: 100%;
+	margin: 0;
+}
+.title {
+	background-color: #5c7b1e;
+	top: 35%;
+	width: 100%;
+	margin: 10rem auto 0 auto;
+	padding-top: 6px;
+	padding-bottom: 6px;
+	border-radius: 8px;
+	color: white;
+	text-align: center;
+	font-size: 40px;
+}
+.button {
+	background-color: #8ab92d;
+	border: none;
+	color: white;
+	padding: 10px 10px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	width: 100%;
+	border-radius: 8px;
+	font-size: 16px;
+	font-weight: bold;
+	font-family: Arial, Helvetica, sans-serif;
+}
+.main {
+	width: 100%;
+}
+.menu {
+	font-weight: bold;
+	color: #5c7b1e;
+}
+input[type=text] {
+	width: 100%;
+	padding: 10px 20px;
+	margin: 8px 0;
+	box-sizing: border-box;
+}
+input[type=password] {
+	width: 100%;
+	padding: 10px 20px;
+	margin: 8px 0;
+	box-sizing: border-box;
+}
+table {
+	margin: 10px auto 0 auto;
+}
+.board td {
 	padding-left: 10px;
 	padding-top: 6px;
 	padding-bottom: 6px;
 }
-table, h2 {
-	margin-left: 10px;
-}
-div {
-	font-weight: bold;
-	color: yellowgreen;
+h2 {
+	text-align: center;
 }
 .prop {
 	font-weight: bold;

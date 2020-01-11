@@ -32,20 +32,24 @@
 </head>
 <body>
 	<%@ include file="../include/menu.jsp" %>
-	<h2 style="margin-left: 95px;">로그인하기</h2>
-	<form name="form1" method="post">
-		<table width="400px">
+	<form name="form1" class="main" method="post">
+		<table width="450px" border="0" cellspacing="0" cellpadding="1">
+			<thead>
+				<tr>
+					<td colspan="2" align="center" width="100%"><div class="title">UserBoardProj</div></td>
+				</tr>
+			</thead>
 			<tr>
-				<td>아이디</td>
-				<td><input id="userid" name="userid" /></td>
+				<td align="center" width="30%"><button class="button">아이디</button></td>
+				<td width="70%"><input id="userid" name="userid" type="text" /></td>
 			</tr>
 			<tr>
-				<td>비밀번호</td>
-				<td><input id="password" name="password" type="password" /></td>
+				<td align="center" width="30%"><button class="button">비밀번호</button></td>
+				<td width="70%"><input id="password" name="password" type="password" /></td>
 			</tr>
 			<tr>
-				<td colspan="2" align="center">
-					<button type="button" id="loginButton" style="margin: 10px 125px 10px 0px;">로그인</button>
+				<td colspan="2" align="center" width="100%">
+					<button class="button" id="loginButton" style="margin-bottom: 10px;">로그인</button>
 					<c:if test="${ param.message == 'guest' }">
 						<div style="color: darkred; margin-right: 105px;">
 							아직 로그인되지 않았습니다.

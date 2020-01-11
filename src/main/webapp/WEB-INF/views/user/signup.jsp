@@ -9,32 +9,37 @@
 </head>
 <body>
 	<%@ include file="../include/menu.jsp" %>
-	<h2>회원 등록 양식</h2>
-	<form name="form1" method="post" action="${ path }/user/insert.do">
-		<table border="1" width="400px">
+	<form name="form1" class="main" method="post" action="${ path }/user/insert.do">
+		<table width="450px" border="0" cellspacing="0" cellpadding="1">
+			<thead>
+				<tr>
+					<td colspan="2" align="center" width="100%"><div class="title">회원 가입</div></td>
+				</tr>
+			</thead>
 			<tr>
-				<td>아이디</td>
-				<td><input name="userid" value="${ dto.userid }" /></td>
+				<td align="center" width="30%"><button class="button">아이디</button></td>
+				<td width="70%"><input id="userid" name="userid" type="text" value="${ dto.userid }" /></td>
 			</tr>
 			<tr>
-				<td>비밀번호</td>
-				<td><input type="password" name="password" value="${ dto.password }" /></td>
+				<td align="center" width="30%"><button class="button">비밀번호</button></td>
+				<td width="70%"><input id="password" name="password" type="password" value="${ dto.password }" /></td>
 			</tr>
 			<tr>
-				<td>비밀번호 확인</td>
-				<td><input type="password" name="checkpassword" /></td>
+				<td align="center" width="30%"><button class="button">비밀번호 확인</button></td>
+				<td width="70%"><input type="password" name="checkpassword" /></td>
 			</tr>
 			<tr>
-				<td>이름</td>
-				<td><input name="username" value="${ dto.username }" /></td>
+				<td align="center" width="30%"><button class="button">이름</button></td>
+				<td width="70%"><input name="username" type="text" value="${ dto.username }" /></td>
 			</tr>
 			<tr>
-				<td>이메일</td>
-				<td><input name="email" value="${ dto.email }" /></td>
+				<td align="center" width="30%"><button class="button">이메일</button></td>
+				<td width="70%"><input name="email" type="text" value="${ dto.email }" /></td>
 			</tr>
 			<tr>
-				<td colspan="2"><input type="submit" value="등록" />
-					<div>${ message }</div>
+				<td colspan="2" align="center" width="100%">
+					<button class="button" type="submit" style="margin-bottom: 10px;">양식 제출</button>
+					<div style="color: darkred;">${ message }</div>
 				</td>
 			</tr>
 		</table>
