@@ -45,7 +45,7 @@
 	<c:if test="${ sessionScope.userid != null }">
 		<table width="600px">
 			<tr>
-				<td width="15%">
+				<td width="20%">
 					<button class="button" id="writeButton">새 글</button>
 				</td>
 				<td width="90%"></td>

@@ -11,8 +11,9 @@
 		order by boardingnumber desc
 	</select>
 	
+	<!-- 작성한 글을 데이터베이스에 저장한다 -->
 	<insert id="insert">
-		insert into postboard (boardingnumber, content, writer)
+		insert into postboard (boardingnumber, title, content, writer)
 		values (sequenceboard.nextval, #{ title }, #{ content }, #{ writer })
 	</insert>
 </mapper>

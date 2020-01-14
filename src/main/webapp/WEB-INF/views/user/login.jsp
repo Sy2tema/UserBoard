@@ -30,12 +30,18 @@
 			});
 		});
 	</script>
+	<style>
+		table {
+			border-spacing: 5px 10px;
+			width: 450px;
+			border: 0;
+		}
+	</style>
 </head>
 <body>
 	<%@ include file="../include/menu.jsp" %>
 	<form name="form1" class="main" method="post">
-		
-		<table width="450px" border="0" cellspacing="0" cellpadding="1">
+		<table>
 			<thead>
 				<tr>
 					<td colspan="2" align="center" width="100%"><div class="title">UserBoardProj</div></td>
@@ -51,7 +57,7 @@
 			</tr>
 			<tr>
 				<td colspan="2" align="center" width="100%">
-					<button class="button" id="loginButton" style="margin-bottom: 10px;">로그인</button>
+					<button class="button" id="loginButton" style="margin-bottom: 20px;">로그인</button>
 						<c:if test="${ param.message == 'guest' }">
 						<div style="color: darkred;">
 							아직 로그인되지 않았습니다.

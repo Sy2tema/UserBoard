@@ -7,17 +7,22 @@ import java.util.Map;
 import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.tistory.codingtrainee.model.board.dto.BoardDTO;
+import com.tistory.codingtrainee.model.user.dto.UserDTO;
 import com.tistory.codingtrainee.service.board.BoardService;
 
 @Controller
 @RequestMapping("/board/*")
 public class BoardController {
+	private static final Logger logger = LoggerFactory.getLogger(BoardController.class);
+	
 	@Inject
 	BoardService boardService;
 	
@@ -39,17 +44,24 @@ public class BoardController {
 		return "board/write_post";
 	}
 	
-	// DB에 입력된 글을 저장해주는 메소드
-	@RequestMapping("insert.do")
-	public String insert(@ModelAttribute BoardDTO dto, HttpSession session) throws Exception {
-		// 현재 로그인중인 사용자의 아이디값을 입력받는다
-		String writer = (String)session.getAttribute("userid");
-		// TODO : 로그인되지 않은 상태에서는 로그인 화면으로 넘어가도록 조치한다
-		dto.setWriter(writer);
-		// 레코드를 저장시킨다
-		boardService.writePost(dto);
+	// 글 쓰기
+	@RequestMapping("create.do")
+	public String create(@ModelAttribute BoardDTO dto, HttpSession session) {
+		// 현재 로그인한 사용자의 이름을 받는다
+		// 로그인의 여부는 인터셉터를 이용해서 처리하도록 한다
+		String writer = (String) session.getAttribute("name");
+	
 		
-		// 게시판의 내용을 갱신시킨다
+		dto.setWriter(writer);
+		
+		try {
+			logger.info(writer);
+			// 레코드를 저장한다
+			boardService.writePost(dto);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
 		return "redirect:/board/list.do";
 	}
 }

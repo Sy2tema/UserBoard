@@ -41,4 +41,16 @@
 	
 	<!-- String bean을 태그로 검색하지 않고 자동으로 검색하도록 함 (auto scan) -->
 	<context:component-scan base-package="com.tistory.codingtrainee" />
+	
+	<!-- 인터셉터 선언 -->
+	<!-- <beans:bean id="loginInterceptor"
+		class="com.tistory.codingtrainee.intercepter.loginInterceptor" /> 
+		
+	<interceptors>
+		<interceptor>
+			<mapping path="/board/write.do" />
+			<mapping path="/board/create.do" />
+			<beans:ref bean="loginInterceptor" />
+		</interceptor>
+	</interceptors> -->
 </beans:beans>
