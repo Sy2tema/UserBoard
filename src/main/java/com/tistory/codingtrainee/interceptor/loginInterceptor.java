@@ -8,7 +8,7 @@ import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 // 사용자가 여러 작업을 수행하려 할 때 로그인이 되어있는지에 대한 여부를 확인해주는 역할을 담당한다
 public class loginInterceptor extends HandlerInterceptorAdapter {
-
+	// 여러 요청들 전에 경유하는 메소드
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
@@ -23,5 +23,4 @@ public class loginInterceptor extends HandlerInterceptorAdapter {
 		
 		return true;
 	}
-	
 }

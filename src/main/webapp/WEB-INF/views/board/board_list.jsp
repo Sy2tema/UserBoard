@@ -42,7 +42,7 @@
 			</tr>
 		</c:forEach>
 	</table>
-	<c:if test="${ sessionScope.userid != null }">
+	<c:if test="${ sessionScope.userid != null || sessionScope.admin_userid != null }">
 		<table width="600px">
 			<tr>
 				<td width="20%">

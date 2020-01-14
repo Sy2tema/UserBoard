@@ -16,8 +16,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class UploadController {
-	private static final Logger logger = LoggerFactory.getLogger(UploadController.class);
-	
 	// servlet-context에 설정되어 있는 리소스를 참조한다
 	// bean의 id가 uploadPath인 태그를 참조한다는 의미를 가지고 있다
 	@Resource(name = "uploadPath")
@@ -34,11 +32,7 @@ public class UploadController {
 		// 한글 깨짐현상을 발견해 값을 받을 때 디코딩시켜주는 코드를 추가했다
 		String fileName = new String(file.getOriginalFilename().getBytes("8859_1"), "UTF-8"); 
 		
-		logger.info("파일 이름 : " + file.getOriginalFilename());
 		fileName = file.getOriginalFilename();
-		logger.info("파일 크기 : " + file.getSize());
-		logger.info("컨텐트 타입 : " + file.getContentType());
-		
 		fileName = uploadFile(fileName, file.getBytes());
 		
 		modelView.setViewName("upload/upload_result");

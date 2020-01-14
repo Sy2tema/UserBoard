@@ -14,7 +14,7 @@
 			<c:when test="${ sessionScope.userid != null }">
 				<h2>UserBoard프로젝트의 홈 화면입니다.</h2>
 				<h2>
-					${ sessionScope.name } (${ sessionScope.userid }) 님의 방문을 환영합니다.
+					${ sessionScope.username } (${ sessionScope.userid }) 님의 방문을 환영합니다.
 				</h2>
 			</c:when>
 			<c:otherwise>

@@ -21,8 +21,6 @@ import com.tistory.codingtrainee.service.user.UserService;
 @Controller
 @RequestMapping("/user/*") // 공통 url을 미리 매핑해둔다
 public class UserController {
-	private static final Logger logger = LoggerFactory.getLogger(UserController.class);
-	
 	// 의존관계를 주입시켜주는 것은 Spring에서 아주 중요하다
 	@Inject
 	UserService userService;
@@ -33,7 +31,6 @@ public class UserController {
 	@RequestMapping("list.do")
 	public String userList(Model model) {		
 		List<UserDTO> list = userService.userList();
-		logger.info("회원 목록 : " + list);
 		model.addAttribute("list", list);
 		
 		// 출력 페이지로 포워딩시킨다
@@ -43,7 +40,6 @@ public class UserController {
 	// .do를 사용하고자 한다면 반드시 Controller에서 해당 작업을 실제로 실행하는 코드를 넣어주어야 정상 작동된다
 	@RequestMapping("signup.do")
 	public String signup(Model model) {
-		logger.info("signup()메소드가 호출되었습니다.");
 		return "user/signup";
 	}
 	
@@ -112,8 +108,6 @@ public class UserController {
 		// 관리자 계정과 같은 아이디로 가입하는 것을 방지하기 위한 부분
 		String isAdmin = adminService.loginCheck(dto);
 		
-		logger.info(isAdmin);
-		
 		if (isAdmin != null) {
 			model.addAttribute("message", "해당 아이디로는 가입이 불가능합니다.");
 			
@@ -130,8 +124,6 @@ public class UserController {
 	// RequestParam어노테이션은 ModelAttribute어노테이션과는 달리 form에서 원하는 값만 저장할 수 있도록 만들어준다
 	@RequestMapping("view.do")
 	public String view(@RequestParam String userid, Model model) {
-		logger.info("조회한 회원 아이디 : " + userid);
-		
 		// 서비스 클래스를 통해 찾아낸 해당 유저의 정보를 모델에 저장한다
 		model.addAttribute("dto", userService.viewUser(userid));
 		

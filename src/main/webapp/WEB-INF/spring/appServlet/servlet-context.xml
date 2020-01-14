@@ -3,9 +3,13 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:beans="http://www.springframework.org/schema/beans"
 	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
 	xsi:schemaLocation="http://www.springframework.org/schema/mvc https://www.springframework.org/schema/mvc/spring-mvc.xsd
 		http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
-		http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
+		http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
 
 	<!-- 웹 서비스와 관련된 설정들을 저장한다. -->
 
@@ -42,15 +46,30 @@
 	<!-- String bean을 태그로 검색하지 않고 자동으로 검색하도록 함 (auto scan) -->
 	<context:component-scan base-package="com.tistory.codingtrainee" />
 	
+	<!-- AOP설정을 통해 자동적으로 Proxy객체를 생성하도록 만든다 -->
+	<aop:aspectj-autoproxy />
+	
 	<!-- 인터셉터 선언 -->
-	<!-- <beans:bean id="loginInterceptor"
-		class="com.tistory.codingtrainee.intercepter.loginInterceptor" /> 
-		
+	<beans:bean id="loginInterceptor"
+		class="com.tistory.codingtrainee.interceptor.loginInterceptor" /> 
+	<beans:bean id="adminInterceptor"
+		class="com.tistory.codingtrainee.interceptor.adminInterceptor" />
+	
+	<!-- 로그인 여부를 확인하는 인터셉터 -->
 	<interceptors>
 		<interceptor>
 			<mapping path="/board/write.do" />
 			<mapping path="/board/create.do" />
 			<beans:ref bean="loginInterceptor" />
 		</interceptor>
-	</interceptors> -->
+	</interceptors>
+	
+	<!-- 관리자인지 여부를 확인하는 인터셉터 -->
+	<interceptors>
+		<interceptor>
+			<mapping path="/board/write.do" />
+			<mapping path="/board/create.do" />
+			<beans:ref bean="adminInterceptor" />
+		</interceptor>
+	</interceptors>
 </beans:beans>

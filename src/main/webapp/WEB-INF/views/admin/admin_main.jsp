@@ -9,9 +9,9 @@
 </head>
 <body>
 	<%@ include file="../include/admin_menu.jsp" %>
-	<c:if test="${ sessionScope.userid != null }">
+	<c:if test="${ sessionScope.admin_userid != null }">
 		<h2>
-			${ sessionScope.username } (${ sessionScope.userid }) 님의 방문을 환영합니다.
+			${ sessionScope.admin_username } (${ sessionScope.admin_userid }) 님의 방문을 환영합니다.
 		</h2>
 	</c:if>
 </body>

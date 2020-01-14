@@ -18,8 +18,6 @@ import com.tistory.codingtrainee.model.user.dto.UserDTO;
 // 이 어노테이션을 넣어주지 않으면 new를 통해 직접 객체를 생성해주어야 한다
 @Repository
 public class UserDAOImpl implements UserDAO {
-	private static final Logger logger = LoggerFactory.getLogger(UserDAOImpl.class);
-	
 	// SqlSession객체를 개발자가 직접 생성하지 않고 스프링에서 생성시킨 후 주입시킨다
 	// 이 과정은 DI(의존관계 주입)과정이라고 부른다
 	@Inject
@@ -27,8 +25,6 @@ public class UserDAOImpl implements UserDAO {
 	
 	@Override
 	public List<UserDTO> userList() {
-		logger.info("userList()메소드가 호출되었습니다.");
-		
 		// sql mapper에 작성된 sql코드가 실행된다(auto commit and close)
 		// user.userList에서 앞은 namespace, 뒤는 id가 된다
 		return sqlSession.selectList("user.userList");

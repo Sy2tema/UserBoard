@@ -15,8 +15,6 @@ import com.tistory.codingtrainee.service.admin.AdminService;
 @Controller
 @RequestMapping("/admin/*")
 public class AdminController {
-	private static final Logger logger = LoggerFactory.getLogger(AdminController.class);
-	
 	@Inject
 	AdminService adminService;
 	
@@ -39,8 +37,8 @@ public class AdminController {
 		String name = adminService.loginCheck(dto);
 		
 		if (name != null) {
-			session.setAttribute("userid", dto.getUserid());
-			session.setAttribute("username", name);
+			session.setAttribute("admin_userid", dto.getUserid());
+			session.setAttribute("admin_username", name);
 			modelView.setViewName("admin/admin_main");
 			modelView.addObject("message", "success");
 		} else {

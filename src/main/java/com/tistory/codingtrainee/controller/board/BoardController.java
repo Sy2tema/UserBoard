@@ -21,8 +21,6 @@ import com.tistory.codingtrainee.service.board.BoardService;
 @Controller
 @RequestMapping("/board/*")
 public class BoardController {
-	private static final Logger logger = LoggerFactory.getLogger(BoardController.class);
-	
 	@Inject
 	BoardService boardService;
 	
@@ -55,7 +53,6 @@ public class BoardController {
 		dto.setWriter(writer);
 		
 		try {
-			logger.info(writer);
 			// 레코드를 저장한다
 			boardService.writePost(dto);
 		} catch (Exception e) {

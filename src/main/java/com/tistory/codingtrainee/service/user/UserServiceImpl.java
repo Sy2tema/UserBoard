@@ -15,8 +15,6 @@ import com.tistory.codingtrainee.model.user.dto.UserDTO;
 // DAO와는 달리 구현 단계에서 Service어노테이션을 사용한다는 차이가 있다
 @Service
 public class UserServiceImpl implements UserService {
-	private static final Logger logger = LoggerFactory.getLogger(UserServiceImpl.class);
-	
 	// Spring컨테이너가 자동으로 dao객체와 연결시켜준다 (의존관계)
 	@Inject
 	UserDAO userDao;
@@ -55,7 +53,7 @@ public class UserServiceImpl implements UserService {
 		if (name != null) {
 			// 세션변수에 값을 등록한다
 			session.setAttribute("userid", dto.getUserid());
-			session.setAttribute("name", name);
+			session.setAttribute("username", name);
 		}
 		
 		return name;

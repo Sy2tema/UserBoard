@@ -12,7 +12,7 @@
 			<a href="${ path }/user/login.do">로그인</a>
 		</c:when>
 		<c:otherwise>
-			${ sessionScope.name }님, 환영합니다. / 
+			${ sessionScope.username }님, 환영합니다. / 
 			<a href="${ path }/user/logout.do">로그아웃</a>	
 		</c:otherwise>
 	</c:choose>
