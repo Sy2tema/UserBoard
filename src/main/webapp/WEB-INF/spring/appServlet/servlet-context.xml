@@ -65,11 +65,11 @@
 	</interceptors>
 	
 	<!-- 관리자인지 여부를 확인하는 인터셉터 -->
-	<interceptors>
+	<!-- <interceptors>
 		<interceptor>
 			<mapping path="/board/write.do" />
 			<mapping path="/board/create.do" />
 			<beans:ref bean="adminInterceptor" />
 		</interceptor>
-	</interceptors>
+	</interceptors> -->
 </beans:beans>

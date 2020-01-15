@@ -5,9 +5,11 @@
 	
 <mapper namespace="board">
 	<!-- 조건 없이 모든 글 출력 -->
-	<select id="postList" resultType="boardDto">
-		select boardingnumber, writer, title, boardingdate, viewcount
-		from postboard
+	<select id="postList" 
+		resultType="BoardDto">
+		select boardingnumber, title, writer, username, boardingdate, viewcount
+		from postboard pb, userboard ub
+		where pb.writer = ub.userid
 		order by boardingnumber desc
 	</select>
 	

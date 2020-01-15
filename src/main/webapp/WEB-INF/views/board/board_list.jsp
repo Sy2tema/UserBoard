@@ -35,7 +35,7 @@
 			<tr>
 				<td>${ row.boardingnumber }</td>
 				<td>${ row.title }</td>
-				<td>${ row.writer }</td>
+				<td>${ row.username }</td>
 				<td><fmt:formatDate value="${ row.boardingdate }"
 						pattern="yyyy-MM-dd HH:mm:ss" /></td>
 				<td>${ row.viewCount }</td>

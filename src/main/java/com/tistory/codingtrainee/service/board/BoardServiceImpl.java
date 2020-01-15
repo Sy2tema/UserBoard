@@ -62,8 +62,8 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override
-	public List<BoardDTO> postList(int start, int end, String searchOption, String keyword) throws Exception {
-		return boardDao.postList(start, end, searchOption, keyword);
+	public List<BoardDTO> postList(int startPage, int endPage, String searchOption, String keyword) throws Exception {
+		return boardDao.postList(startPage, endPage, searchOption, keyword);
 	}
 
 	@Override

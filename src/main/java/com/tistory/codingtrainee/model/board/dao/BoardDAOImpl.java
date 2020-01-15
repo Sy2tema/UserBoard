@@ -1,6 +1,8 @@
 package com.tistory.codingtrainee.model.board.dao;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -62,8 +64,14 @@ public class BoardDAOImpl implements BoardDAO {
 	}
 
 	@Override
-	public List<BoardDTO> postList(int start, int end, String searchoption, String keyword) throws Exception {
-		return sqlSession.selectList("board.postList");
+	public List<BoardDTO> postList(int startpage, int endpage, String searchoption, String keyword) throws Exception {
+		Map<String, Object> map = new HashMap<>();
+		map.put("searchoption", searchoption);
+		map.put("keyword", keyword);
+		map.put("start", startpage);
+		map.put("end", endpage);
+		
+		return sqlSession.selectList("board.postList", map);
 	}
 
 	@Override

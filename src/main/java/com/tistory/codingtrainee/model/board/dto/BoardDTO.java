@@ -8,6 +8,7 @@ public class BoardDTO {
 	private String title;
 	private String content;
 	private String writer; //userboard테이블과 조인을 수행한다
+	private String username; //다른 테이블에서 조인해와 결과를 출력하려 할 때도 DTO에 해당 변수명을 정의해두어야 오류가 발생하지 않는다
 	private Date boardingdate;
 	private int viewCount;
 	private int commentcount; //댓글 개수
@@ -77,6 +78,13 @@ public class BoardDTO {
 		this.files = files;
 	}
 
+	public String getUsername() {
+		return username;
+	}
+	public void setUsername(String username) {
+		this.username = username;
+	}
+	
 	@Override
 	public String toString() {
 		return "BoardDTO [boardingnumber=" + boardingnumber + ", title=" + title + ", content=" + content + ", writer="
