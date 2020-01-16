@@ -7,11 +7,39 @@
 	<!-- 조건 없이 모든 글 출력 -->
 	<select id="postList" 
 		resultType="BoardDto">
+		<include refid="pagingheader" />
 		select boardingnumber, title, writer, username, boardingdate, viewcount
 		from postboard pb, userboard ub
-		where pb.writer = ub.userid
+		<include refid="search" />
 		order by boardingnumber desc
+		<include refid="pagingfooter" />
 	</select>
+	
+	<!-- 조건문 내의 변수명에는 #대신 $를 사용해야 정상적으로 인식한다 -->
+	<sql id="search">
+		<choose>
+			<when test="searchoption == 'all'">
+				where pb.writer = ub.userid and
+				(name like '%' || #{ keyword } || '%'
+				or content like '%' || #{ keyword } || '%'
+				or title like '%' || #{ keyword } || '%')
+			</when>
+			<otherwise>
+				where pb.writer = ub.userid
+				and ${ searchoption } like '%' || #{ keyword } || '%'
+			</otherwise>
+		</choose>
+	</sql>
+	
+	<!-- 페이지를 나누고자 할 때 header와 footer를 미리 만들어두어 서브쿼리문을 작성할 때 핵심 로직만 신경쓸 수 있도록 하였다 -->
+	<sql id="pagingheader">
+		select * from (
+			select rownumber as rn, A.* from (
+	</sql>
+	<sql id="pagingfooter">
+			) A
+		) where rn between #{ startpage } and #{ endpage }
+	</sql>
 	
 	<!-- 작성한 글을 데이터베이스에 저장한다 -->
 	<insert id="insert">

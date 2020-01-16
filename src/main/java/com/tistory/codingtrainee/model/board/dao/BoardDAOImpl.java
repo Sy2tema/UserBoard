@@ -68,8 +68,8 @@ public class BoardDAOImpl implements BoardDAO {
 		Map<String, Object> map = new HashMap<>();
 		map.put("searchoption", searchoption);
 		map.put("keyword", keyword);
-		map.put("start", startpage);
-		map.put("end", endpage);
+		map.put("startpage", startpage);
+		map.put("endpage", endpage);
 		
 		return sqlSession.selectList("board.postList", map);
 	}

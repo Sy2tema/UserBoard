@@ -12,10 +12,16 @@
 				location.href="${ path }/board/write.do";
 			});
 		});
+		function list(page) {
+			location.href = "${ path }/board/list.do?currentPage" + page
+				+ "&searchOption=${ map.searchOption }"
+				+ "&keyword=${ map.keyword }";
+		}
 	</script>
 </head>
 <body>
 	<%@ include file="../include/menu.jsp" %>
+	<div>총 ${ map.count }개의 게시물이 있습니다.</div>
 	<table width="600px" style="margin-top: 3rem; margin-bottom: 1rem;">
 		<tr>
 			<td class="title">
@@ -41,6 +47,14 @@
 				<td>${ row.viewCount }</td>
 			</tr>
 		</c:forEach>
+		<!-- 페이지를 이동할 수 있도록 만들어주는 부분 -->
+		<tr>
+			<td>
+				<c:forEach var="number" begin="1" end="${ map.pager.totalPage }">
+					<a href="javascript:list('${ number }')">${ number }</a>
+				</c:forEach>
+			</td>
+		</tr>
 	</table>
 	<c:if test="${ sessionScope.userid != null || sessionScope.admin_userid != null }">
 		<table width="600px">
@@ -51,7 +65,6 @@
 				<td width="90%"></td>
 			</tr>
 		</table>
-		
 	</c:if>
 </body>
 </html>
