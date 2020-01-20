@@ -3,17 +3,28 @@ package com.tistory.codingtrainee.model.board.dto;
 import java.util.Arrays;
 import java.util.Date;
 
+import com.tistory.codingtrainee.model.user.dto.UserDTO;
+
 public class BoardDTO {
 	private int boardingnumber;
 	private String title;
 	private String content;
 	private String writer; //userboard테이블과 조인을 수행한다
-	private String username; //다른 테이블에서 조인해와 결과를 출력하려 할 때도 DTO에 해당 변수명을 정의해두어야 오류가 발생하지 않는다
 	private Date boardingdate;
-	private int viewCount;
+	private int rownum; //페이징을 위한 변수
+	private int viewcount;
 	private int commentcount; //댓글 개수
 	private String isvisible; //화면 표시 여부
 	private String[] files; //첨부 파일
+	
+	private UserDTO userDTO; //다른 테이블에서 조인해와 결과를 출력하려 할 때도 DTO에 해당 변수명을 정의해두어야 오류가 발생하지 않는다
+	
+	public UserDTO getUserDTO() {
+		return userDTO;
+	}
+	public void setUserDTO(UserDTO userDTO) {
+		this.userDTO = userDTO;
+	}
 	
 	public int getBoardingnumber() {
 		return boardingnumber;
@@ -50,11 +61,18 @@ public class BoardDTO {
 		this.boardingdate = boardingdate;
 	}
 	
-	public int getViewCount() {
-		return viewCount;
+	public int getViewcount() {
+		return viewcount;
 	}
-	public void setViewCount(int viewCount) {
-		this.viewCount = viewCount;
+	public void setViewcount(int viewcount) {
+		this.viewcount = viewcount;
+	}
+	
+	public int getRownum() {
+		return rownum;
+	}
+	public void setRownum(int rownum) {
+		this.rownum = rownum;
 	}
 	
 	public int getCommentcount() {
@@ -77,18 +95,12 @@ public class BoardDTO {
 	public void setFiles(String[] files) {
 		this.files = files;
 	}
-
-	public String getUsername() {
-		return username;
-	}
-	public void setUsername(String username) {
-		this.username = username;
-	}
 	
 	@Override
 	public String toString() {
 		return "BoardDTO [boardingnumber=" + boardingnumber + ", title=" + title + ", content=" + content + ", writer="
-				+ writer + ", boardingdate=" + boardingdate + ", viewCount=" + viewCount + ", commentcount="
-				+ commentcount + ", isvisible=" + isvisible + ", files=" + Arrays.toString(files) + "]";
+				+ writer + ", boardingdate=" + boardingdate + ", rownum=" + rownum + ", viewcount=" + viewcount
+				+ ", commentcount=" + commentcount + ", isvisible=" + isvisible + ", files=" + Arrays.toString(files)
+				+ ", userDTO=" + userDTO + "]";
 	}
 }

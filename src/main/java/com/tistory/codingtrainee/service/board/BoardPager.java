@@ -32,10 +32,10 @@ public class BoardPager {
 		currentBlock = 1;
 		this.currentPage = currentPage;
 		
-		setTotalPage(count);
+		setTotalPage(count); // 전체 페이지의 수를 계산해주는 메소드
+		setTotalBlock();
 		
 		setPageRange(); // 쿼리문 중 between부분에 들어갈 시작값과 끝값을 계산하는 메소드
-		setTotalBlock();
 		setBlockRange();
 	}
 	
@@ -50,7 +50,7 @@ public class BoardPager {
 	// 아래 페이지 이동에 관련된 숫자들을 눌렀을 경우들의 동작을 명시해둔 메소드
 	public void setBlockRange() {
 		// 현재 페이지가 몇 번째 페이지 블록에 속하는지 확인한다
-		currentBlock = (int) Math.ceil((currentBlock - 1) / BLOCK_SCALE) + 1;
+		currentBlock = (int) Math.ceil((currentPage - 1) / BLOCK_SCALE) + 1;
 		
 		blockBegin = (currentBlock - 1) * BLOCK_SCALE + 1;
 		blockEnd = blockBegin + BLOCK_SCALE - 1;
@@ -58,7 +58,7 @@ public class BoardPager {
 		// 끝 페이지 번호가 전체 페이지 번호를 넘어갈 수 없도록 조치해두었다
 		if (blockEnd > totalPage) blockEnd = totalPage;
 		
-		// <와 >을 누르면 이동할 페이지의 번호를 지정한다
+		// [prev]와 [next]을 누르면 이동할 페이지의 번호를 지정한다
 		previousPage = currentBlock == 1 ? 1 : (currentBlock - 1) * BLOCK_SCALE;
 		nextPage = currentBlock > totalBlock
 				? (currentBlock * BLOCK_SCALE) 

@@ -21,7 +21,7 @@
 </head>
 <body>
 	<%@ include file="../include/menu.jsp" %>
-	<div>총 ${ map.count }개의 게시물이 있습니다.</div>
+	<div style="text-align: center;">총 ${ map.count }개의 게시물이 있습니다.</div>
 	<table width="600px" style="margin-top: 3rem; margin-bottom: 1rem;">
 		<tr>
 			<td class="title">
@@ -49,10 +49,29 @@
 		</c:forEach>
 		<!-- 페이지를 이동할 수 있도록 만들어주는 부분 -->
 		<tr>
-			<td>
-				<c:forEach var="number" begin="1" end="${ map.pager.totalPage }">
-					<a href="javascript:list('${ number }')">${ number }</a>
+			<c:if test="${ map.pager.currentBlock > 1}">
+				<a href="javascript:list('1')">[first]</a>
+			</c:if>
+			<c:if test="${ map.pager.currentPage > 1 }">
+				<a href="javascript:list('${ map.pager.prevPage }')">[prev]</a>
+			</c:if>
+			<td colspan="5" align="center">
+				<c:forEach var="number" begin="${ map.pager.blockBegin }" end="${ map.pager.blockEnd }">
+					<c:choose>
+						<c:when test="${ number == map.pager.currentPage }">
+							<span style="color: darkred;">${ number }</span>&nbsp;
+						</c:when>
+						<c:otherwise>
+							<a href="javascript:list('${ number }')">${ number }</a>&nbsp;
+						</c:otherwise>
+					</c:choose>
 				</c:forEach>
+				<c:if test="${ map.pager.currentBlock <= map.pager.totalBlock }">
+					<a href="javascript:list('${ map.pager.nextPage }')">[next]</a>
+				</c:if>
+				<c:if test="${ map.pager.currentPage <= map.pager.totalPage }">
+					<a href="javascript:list('${ map.pager.totalPage }')">[end]</a>
+				</c:if>
 			</td>
 		</tr>
 	</table>

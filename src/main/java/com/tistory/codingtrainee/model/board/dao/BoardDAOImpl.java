@@ -82,8 +82,11 @@ public class BoardDAOImpl implements BoardDAO {
 
 	@Override
 	public int articleCount(String searchoption, String keyword) throws Exception {
-		// TODO Auto-generated method stub
-		return 0;
+		Map<String, String> map = new HashMap<>();
+		map.put("searchoption", searchoption);
+		map.put("keyword", keyword);
+		
+		return sqlSession.selectOne("board.articleCount", map);
 	}
 
 }

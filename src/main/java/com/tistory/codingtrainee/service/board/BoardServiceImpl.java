@@ -74,8 +74,7 @@ public class BoardServiceImpl implements BoardService {
 
 	@Override
 	public int articleCount(String searchOption, String keyword) throws Exception {
-		// TODO Auto-generated method stub
-		return 0;
+		return boardDao.articleCount(searchOption, keyword);
 	}
 
 }
