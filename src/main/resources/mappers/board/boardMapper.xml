@@ -5,8 +5,7 @@
 	
 <mapper namespace="board">
 	<!-- 조건 없이 모든 글 출력 -->
-	<select id="postList" 
-		resultType="BoardDto">
+	<select id="postList" resultType="BoardDto">
 		<include refid="pagingHeader" />
 		select	pb.boardingnumber,
 				pb.title,
@@ -22,7 +21,9 @@
 	</select>
 	
 	<select id="articleCount" resultType="int">
-		select count(*) from postboard
+		select count(*) 
+		from postboard pb, userboard ub
+		<include refid="searchOption" />
 	</select>
 	
 	<!-- 조건문 내의 변수명에는 #대신 $를 사용해야 정상적으로 인식한다 -->

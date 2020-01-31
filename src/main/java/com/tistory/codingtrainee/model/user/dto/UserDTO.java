@@ -15,6 +15,20 @@ public class UserDTO {
 	
 	public UserDTO() {
 	}
+	
+	public UserDTO(String userid, String password, String username, String email, Date signupdate, String newpassword,
+			String checkpassword) {
+		super();
+		this.userid = userid;
+		this.password = password;
+		this.username = username;
+		this.email = email;
+		this.signupdate = signupdate;
+		this.newpassword = newpassword;
+		this.checkpassword = checkpassword;
+	}
+
+
 
 	public String getUserid() {
 		return userid;
